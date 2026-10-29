@@ -69,6 +69,7 @@ docs/
 ├── guides/                       # Core Architecture & Initialization (Pinned at Top)
 │   ├── app_initialization.md     # Production Bootstrap: WidgetsFlutterBinding, ScreenUtil, System Chrome, Firebase
 │   ├── location_and_gps.md       # Dual-Gate Location: Permission vs Hardware GPS, Cache Fallback & ANR Fix
+│   ├── flavors.md                # Multi-Flavor Architecture: Android Gradle, iOS Xcode Schemes & AppConfig
 │   └── getting_started.md        # Portal Overview, Navigation, MCP & Architecture Taxonomy
 ├── skills/                       # Senior Developer AI Skills & Automated Tooling
 │   ├── flutter_superpower.md     # The 12 Laws of Flutter Architecture, SafeCubit, Clean Architecture & Evidence Gate

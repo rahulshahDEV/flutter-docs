@@ -332,3 +332,4 @@ class _AuthInterceptor extends Interceptor {
    HTTP response headers (`content-length`, `etag`, `server`, `cf-ray`, `date`) take up 15–20 lines per request and are rarely needed in daily feature work. Setting `responseHeader: false` keeps your log stream concise.
 4. **Rule 4: Never Log Sensitive User Passwords or Secret Keys:**
    Even in development builds, ensure forms sanitize password fields before sending them to `AppLogger`.
+

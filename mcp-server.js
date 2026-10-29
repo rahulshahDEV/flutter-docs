@@ -33,6 +33,13 @@ const AVAILABLE_DOCS = [
     path: path.join(DOCS_DIR, 'guides', 'location_and_gps.md'),
   },
   {
+    id: 'guides/flavors',
+    title: 'Flutter Flavors & Environment Setup (Android & iOS)',
+    category: 'Guides',
+    description: 'Complete multi-flavor environment pipeline: AppConfig runtime singleton, Android Gradle Kotlin DSL productFlavors, iOS Xcode Build Configurations and Schemes, and .env loading.',
+    path: path.join(DOCS_DIR, 'guides', 'flavors.md'),
+  },
+  {
     id: 'guides/getting_started',
     title: 'Getting Started with Flutter Docs',
     category: 'Guides',
@@ -285,6 +292,8 @@ const TOOLS = [
           enum: [
             'app_bootstrap_dart',
             'location_helper_dart',
+            'flutter_flavor_app_config_dart',
+            'android_build_gradle_flavors_kts',
             'feed_prefetch_manager_dart',
             'git_config_aliases',
             'git_hooks_lefthook_yml',
@@ -435,6 +444,16 @@ function handleGetSnippet(args) {
       file: path.join(DOCS_DIR, 'guides', 'location_and_gps.md'),
       regex: /```dart([\s\S]*?)```/,
       description: 'Production LocationHelper with dual-gate checks, last-known fallback, and Android NMEA ANR fix.',
+    },
+    flutter_flavor_app_config_dart: {
+      file: path.join(DOCS_DIR, 'guides', 'flavors.md'),
+      regex: /### 2\.1 The `AppConfig` Singleton[\s\S]*?```dart([\s\S]*?)```/,
+      description: 'Production AppConfig singleton with Flavor enum, .env resolution, and dynamic URLs.',
+    },
+    android_build_gradle_flavors_kts: {
+      file: path.join(DOCS_DIR, 'guides', 'flavors.md'),
+      regex: /```kotlin([\s\S]*?)```/,
+      description: 'Android Gradle Kotlin DSL productFlavors with applicationIdSuffix and resValue strings.',
     },
     feed_prefetch_manager_dart: {
       file: path.join(DOCS_DIR, 'social', 'feed_prefetch.md'),

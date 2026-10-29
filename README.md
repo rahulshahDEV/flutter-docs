@@ -35,6 +35,7 @@ A lightning-fast, personal documentation portal styled with a pure **VS Code Dar
 │   ├── guides/                       # Core Architecture Guides (Pinned at Top)
 │   │   ├── app_initialization.md     # Production Bootstrap: WidgetsFlutterBinding, ScreenUtil, System Chrome, Firebase
 │   │   ├── location_and_gps.md       # Dual-Gate Location: Permission vs Hardware GPS, Cache Fallback & ANR Fix
+│   │   ├── flavors.md                # Multi-Flavor Architecture: Android Gradle, iOS Xcode Schemes & AppConfig
 │   │   └── getting_started.md        # Portal introduction and architecture conventions
 │   ├── skills/                       # Senior Developer AI Skills & Tooling
 │   │   ├── flutter_superpower.md     # Flutter Superpower: 12 Architectural Laws & Senior Mode
