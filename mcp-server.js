@@ -40,6 +40,13 @@ const AVAILABLE_DOCS = [
     path: path.join(DOCS_DIR, 'guides', 'flavors.md'),
   },
   {
+    id: 'guides/proguard_rules',
+    title: 'ProGuard & R8 Obfuscation Architecture in Flutter',
+    category: 'Guides',
+    description: 'Complete Android R8 shrinking, obfuscation, and bytecode optimization guide: Universal proguard-rules.pro, MissingPluginException fixes, and mapping.txt de-obfuscation.',
+    path: path.join(DOCS_DIR, 'guides', 'proguard_rules.md'),
+  },
+  {
     id: 'guides/getting_started',
     title: 'Getting Started with Flutter Docs',
     category: 'Guides',
@@ -294,6 +301,8 @@ const TOOLS = [
             'location_helper_dart',
             'flutter_flavor_app_config_dart',
             'android_build_gradle_flavors_kts',
+            'proguard_rules_pro',
+            'android_r8_build_gradle_kts',
             'feed_prefetch_manager_dart',
             'git_config_aliases',
             'git_hooks_lefthook_yml',
@@ -454,6 +463,16 @@ function handleGetSnippet(args) {
       file: path.join(DOCS_DIR, 'guides', 'flavors.md'),
       regex: /```kotlin([\s\S]*?)```/,
       description: 'Android Gradle Kotlin DSL productFlavors with applicationIdSuffix and resValue strings.',
+    },
+    proguard_rules_pro: {
+      file: path.join(DOCS_DIR, 'guides', 'proguard_rules.md'),
+      regex: /```proguard([\s\S]*?)```/,
+      description: 'Universal Flutter proguard-rules.pro protecting engine internals, serialization, Firebase, and native plugins.',
+    },
+    android_r8_build_gradle_kts: {
+      file: path.join(DOCS_DIR, 'guides', 'proguard_rules.md'),
+      regex: /### 2\.1 Kotlin DSL[\s\S]*?```kotlin([\s\S]*?)```/,
+      description: 'Android Gradle Kotlin DSL release configuration enabling isMinifyEnabled and isShrinkResources.',
     },
     feed_prefetch_manager_dart: {
       file: path.join(DOCS_DIR, 'social', 'feed_prefetch.md'),
