@@ -1,6 +1,9 @@
 # Flutter Knowledge Base & Architecture Hub 🚀
 
-Welcome to the **Flutter Engineering Knowledge Base & Architecture Hub**—a high-performance, developer-first documentation portal styled with a pure **VS Code Dark IDE aesthetic** (`#1e1e1e`, `#252526`, `#181818`), optimized for instant static deployment to **Cloudflare Pages**, and connected directly to AI coding assistants via a native **Model Context Protocol (MCP)** server.
+> 🌐 **Live Web Documentation:** [https://docs.rahulsha.com.np](https://docs.rahulsha.com.np/)  
+> 📦 **GitHub Repository:** [https://github.com/rahulshahDEV/flutter-docs](https://github.com/rahulshahDEV/flutter-docs)
+
+Welcome to the **Flutter Engineering Knowledge Base & Architecture Hub**—a high-performance, developer-first documentation portal hosted live at [**docs.rahulsha.com.np**](https://docs.rahulsha.com.np/), styled with a pure **VS Code Dark IDE aesthetic** (`#1e1e1e`, `#252526`, `#181818`), optimized for instant static deployment to **Cloudflare Pages**, and connected directly to AI coding assistants via a native **Model Context Protocol (MCP)** server.
 
 This knowledge base consolidates production-tested architectural blueprints, cryptographic systems, CI/CD pipelines, and open-source packages built for high-scale Flutter applications.
 
@@ -189,8 +192,8 @@ Add this configuration to `.cursor/mcp.json` in your target project:
 ```
 
 ### Available MCP Tools for Your Agent:
-* **`list_flutter_docs`**: Enumerates all guides by category (`Guides`, `Skills`, `Packages`, `In-App Updates`, `Monitoring`, `Analytics`, `Chat & E2E`, `Authentication`, `Notifications`, `CI/CD`).
-* **`read_flutter_doc`**: Fetches the complete, raw markdown manual for any doc ID.
+* **`list_flutter_docs`**: Enumerates all guides by category with direct live web URLs on [docs.rahulsha.com.np](https://docs.rahulsha.com.np/).
+* **`read_flutter_doc`**: Fetches the complete, raw markdown manual for any doc ID (with live web links and remote GitHub fallback).
 * **`search_flutter_docs`**: Searches across the entire knowledge base for symbols, keywords, or error codes.
 * **`get_implementation_code`**: Retrieves copy-paste-ready Dart/YAML/Ruby/TypeScript snippets.
 

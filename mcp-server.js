@@ -17,6 +17,20 @@ const __dirname = path.dirname(__filename);
 
 const DOCS_DIR = path.join(__dirname, 'docs');
 
+const DOCS_BASE_URL = 'https://docs.rahulsha.com.np';
+const GITHUB_REPO_URL = 'https://github.com/rahulshahDEV/flutter-docs';
+const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/rahulshahDEV/flutter-docs/main/docs';
+
+async function fetchRemoteDoc(docId) {
+  try {
+    const res = await fetch(`${GITHUB_RAW_BASE}/${docId}.md`);
+    if (res.ok) {
+      return await res.text();
+    }
+  } catch (_) {}
+  return null;
+}
+
 const AVAILABLE_DOCS = [
   {
     id: 'guides/app_initialization',
@@ -351,6 +365,7 @@ function handleListDocs(args) {
     title: d.title,
     category: d.category,
     description: d.description,
+    web_url: `${DOCS_BASE_URL}/#/doc/${d.id}`,
   }));
 
   return {
@@ -363,7 +378,7 @@ function handleListDocs(args) {
   };
 }
 
-function handleReadDoc(args) {
+async function handleReadDoc(args) {
   const docId = (args && args.doc_id) || '';
   const normalized = docId.toLowerCase().replace(/^\/+|\/+$/g, '');
   const doc = AVAILABLE_DOCS.find(
@@ -373,24 +388,42 @@ function handleReadDoc(args) {
       normalized.includes(d.id.toLowerCase())
   );
 
-  if (!doc || !fs.existsSync(doc.path)) {
+  if (!doc) {
     return {
       isError: true,
       content: [
         {
           type: 'text',
-          text: `Document "${docId}" not found. Available doc IDs: ${AVAILABLE_DOCS.map((d) => d.id).join(', ')}`,
+          text: `Document "${docId}" not found. Browse full docs online: ${DOCS_BASE_URL}\nAvailable doc IDs: ${AVAILABLE_DOCS.map((d) => d.id).join(', ')}`,
         },
       ],
     };
   }
 
-  const content = fs.readFileSync(doc.path, 'utf8');
+  let content = '';
+  if (fs.existsSync(doc.path)) {
+    content = fs.readFileSync(doc.path, 'utf8');
+  } else {
+    content = await fetchRemoteDoc(doc.id);
+  }
+
+  if (!content) {
+    return {
+      isError: true,
+      content: [
+        {
+          type: 'text',
+          text: `Could not load content for "${doc.id}". View online at: ${DOCS_BASE_URL}/#/doc/${doc.id}`,
+        },
+      ],
+    };
+  }
+
   return {
     content: [
       {
         type: 'text',
-        text: content,
+        text: `// Web Documentation: ${DOCS_BASE_URL}/#/doc/${doc.id}\n\n${content}`,
       },
     ],
   };
@@ -400,7 +433,7 @@ function handleSearchDocs(args) {
   const query = ((args && args.query) || '').toLowerCase();
   if (!query) {
     return {
-      content: [{ type: 'text', text: 'Please provide a search query.' }],
+      content: [{ type: 'text', text: `Please provide a search query. You can also search online at ${DOCS_BASE_URL}` }],
     };
   }
 
@@ -419,6 +452,7 @@ function handleSearchDocs(args) {
         results.push({
           doc_id: doc.id,
           title: doc.title,
+          web_url: `${DOCS_BASE_URL}/#/doc/${doc.id}`,
           line: i + 1,
           excerpt,
         });
@@ -434,7 +468,7 @@ function handleSearchDocs(args) {
         text:
           results.length > 0
             ? JSON.stringify(results.slice(0, 10), null, 2)
-            : `No matching content found for query "${query}".`,
+            : `No matching content found for query "${query}". Search full docs at ${DOCS_BASE_URL}`,
       },
     ],
   };
@@ -649,7 +683,7 @@ function handleGetSnippet(args) {
     content: [
       {
         type: 'text',
-        text: `// ${target.description}\n\n${code}`,
+        text: `// ${target.description}\n// Web Documentation: ${DOCS_BASE_URL}\n\n${code}`,
       },
     ],
   };
@@ -675,7 +709,7 @@ function sendResponse(id, result, error) {
   process.stdout.write(JSON.stringify(response) + '\n');
 }
 
-rl.on('line', (line) => {
+rl.on('line', async (line) => {
   if (!line || !line.trim()) return;
 
   try {
@@ -692,7 +726,9 @@ rl.on('line', (line) => {
           },
           serverInfo: {
             name: 'flutter-docs-mcp',
-            version: '1.0.0',
+            version: '1.2.0',
+            homepage: DOCS_BASE_URL,
+            repository: GITHUB_REPO_URL,
           },
         });
         break;
@@ -715,13 +751,13 @@ rl.on('line', (line) => {
 
         let result;
         if (toolName === 'list_flutter_docs') {
-          result = handleListDocs(toolArgs);
+          result = await handleListDocs(toolArgs);
         } else if (toolName === 'read_flutter_doc') {
-          result = handleReadDoc(toolArgs);
+          result = await handleReadDoc(toolArgs);
         } else if (toolName === 'search_flutter_docs') {
-          result = handleSearchDocs(toolArgs);
+          result = await handleSearchDocs(toolArgs);
         } else if (toolName === 'get_implementation_code') {
-          result = handleGetSnippet(toolArgs);
+          result = await handleGetSnippet(toolArgs);
         } else {
           sendResponse(id, null, {
             code: -32601,

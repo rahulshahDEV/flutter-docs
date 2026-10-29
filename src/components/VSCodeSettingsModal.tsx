@@ -7,6 +7,8 @@ import {
   Code2,
   Terminal,
   Cpu,
+  Globe,
+  ExternalLink,
 } from 'lucide-react';
 
 interface VSCodeSettingsModalProps {
@@ -32,6 +34,7 @@ export const VSCodeSettingsModal: React.FC<VSCodeSettingsModalProps> = ({
   };
 
   const mcpServerPath = '/Volumes/automation/flutter docs/mcp-server.js';
+  const liveDocsUrl = 'https://docs.rahulsha.com.np';
   const serverCommand = `node "${mcpServerPath}"`;
   const testCommand = `echo '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}' | node "${mcpServerPath}"`;
 
@@ -176,6 +179,17 @@ export const VSCodeSettingsModal: React.FC<VSCodeSettingsModalProps> = ({
                 <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
                   Stdio Ready
                 </span>
+                <a
+                  href={liveDocsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hidden sm:flex items-center gap-1 text-[11px] font-medium text-[#75beff] hover:text-[#9cdcfe] hover:underline bg-[#007acc]/10 border border-[#007acc]/20 px-2 py-0.5 rounded-full transition-colors"
+                  title="Open live web portal"
+                >
+                  <Globe className="h-3 w-3" />
+                  <span>docs.rahulsha.com.np</span>
+                  <ExternalLink className="h-2.5 w-2.5 opacity-70" />
+                </a>
               </div>
               <p className="text-[11px] text-[#888888]">
                 Connect your AI assistant directly to Flutter Docs via Model Context Protocol
@@ -322,10 +336,23 @@ export const VSCodeSettingsModal: React.FC<VSCodeSettingsModalProps> = ({
 
         {/* Footer */}
         <div className="border-t border-[#2d2d2d] bg-[#252526] px-5 py-3 flex items-center justify-between text-xs text-[#858585]">
-          <span>Stdio Server: <code className="text-[#9cdcfe]">mcp-server.js</code></span>
+          <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+            <span>Stdio Server: <code className="text-[#9cdcfe]">mcp-server.js</code></span>
+            <span className="hidden sm:inline text-[#555555]">•</span>
+            <a
+              href={liveDocsUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1 text-[#75beff] hover:underline"
+            >
+              <Globe className="h-3.5 w-3.5" />
+              <span>docs.rahulsha.com.np</span>
+              <ExternalLink className="h-3 w-3 opacity-70" />
+            </a>
+          </div>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 rounded-lg bg-[#333333] hover:bg-[#3e3e42] text-white transition-colors"
+            className="px-4 py-1.5 rounded-lg bg-[#333333] hover:bg-[#3e3e42] text-white transition-colors ml-2 shrink-0"
           >
             Done
           </button>

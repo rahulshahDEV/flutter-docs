@@ -1,5 +1,12 @@
 # Flutter Docs Portal & AI Automation Hub 🚀
 
+[![Live Docs](https://img.shields.io/badge/Live%20Portal-docs.rahulsha.com.np-007acc?style=flat-square&logo=googlechrome&logoColor=white)](https://docs.rahulsha.com.np/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-rahulshahDEV%2Fflutter--docs-181717?style=flat-square&logo=github)](https://github.com/rahulshahDEV/flutter-docs)
+[![MCP Protocol](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-10b981?style=flat-square)](https://docs.rahulsha.com.np/)
+
+> 🌐 **Live Documentation Portal:** [https://docs.rahulsha.com.np](https://docs.rahulsha.com.np/)  
+> 📦 **GitHub Repository:** [https://github.com/rahulshahDEV/flutter-docs](https://github.com/rahulshahDEV/flutter-docs)
+
 A lightning-fast, personal documentation portal styled with a pure **VS Code Dark IDE aesthetic** (`#1e1e1e`, `#252526`, `#181818`), optimized for direct deployment to **Cloudflare Pages**, paired with a native **Model Context Protocol (MCP)** server for AI coding assistants.
 
 ---
