@@ -103,6 +103,13 @@ const AVAILABLE_DOCS = [
     path: path.join(DOCS_DIR, 'in-app-update', 'upgrader.md'),
   },
   {
+    id: 'monitoring/logger',
+    title: 'Production Logging Architecture (AppLogger & PrettyDioLogger)',
+    category: 'Monitoring',
+    description: 'Structured, leak-proof mobile logging with dart:developer AppLogger (tag filtering, severity levels, kReleaseMode stripping) and PrettyDioLogger formatted HTTP inspection.',
+    path: path.join(DOCS_DIR, 'monitoring', 'logger.md'),
+  },
+  {
     id: 'monitoring/sentry',
     title: 'Sentry Error Monitoring & Telemetry',
     category: 'Monitoring',
@@ -286,6 +293,8 @@ const TOOLS = [
             'goldie_config_ts',
             'in_app_update_helper_dart',
             'upgrader_dialog_helper_dart',
+            'app_logger_dart',
+            'pretty_dio_logger_setup_dart',
             'sentry_init_main_dart',
             'crashlytics_telemetry_dart',
             'amplitude_analytics_module_dart',
@@ -466,6 +475,16 @@ function handleGetSnippet(args) {
       file: path.join(DOCS_DIR, 'in-app-update', 'upgrader.md'),
       regex: /```dart([\s\S]*?)```/,
       description: 'Cross-platform UpgradeAlert and UpgradeCard configuration with custom UpgraderMessages.',
+    },
+    app_logger_dart: {
+      file: path.join(DOCS_DIR, 'monitoring', 'logger.md'),
+      regex: /Create `lib\/core\/debug\/app_logger\.dart`:[\s\S]*?```dart([\s\S]*?)```/,
+      description: 'Production AppLogger with severity badges, tag filtering, and kReleaseMode leak prevention.',
+    },
+    pretty_dio_logger_setup_dart: {
+      file: path.join(DOCS_DIR, 'monitoring', 'logger.md'),
+      regex: /Create `lib\/core\/network\/dio_client\.dart`:[\s\S]*?```dart([\s\S]*?)```/,
+      description: 'DioClient with PrettyDioLogger active in development and sanitization interceptors.',
     },
     sentry_init_main_dart: {
       file: path.join(DOCS_DIR, 'monitoring', 'sentry.md'),

@@ -50,6 +50,7 @@ A lightning-fast, personal documentation portal styled with a pure **VS Code Dar
 │   │   ├── upgrader.md               # Upgrader: App Store & Play Store alerts, UpgradeCard, force updates
 │   │   └── in_app_update.md          # Google Play Core: Immediate fullscreen & flexible background downloads
 │   ├── monitoring/                   # Real-Time Telemetry & Crash Reporting
+│   │   ├── logger.md                 # Structured Logging: Custom AppLogger (tags, zero leak) & PrettyDioLogger
 │   │   ├── sentry.md                 # Sentry: Unhandled Async Errors, Navigation, HTTP & Symbolication
 │   │   └── crashlytics.md            # Firebase Crashlytics: Fatal/Non-fatal errors, Logs & Custom Keys
 │   ├── analytics/                    # Product Telemetry & Metrics
