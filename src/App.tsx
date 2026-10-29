@@ -40,7 +40,8 @@ export const App: React.FC = () => {
 
     const targetDoc =
       (initialId && loadedDocs.find((d) => d.id === initialId)) ||
-      loadedDocs.find((d) => d.id.includes('codemagic')) ||
+      loadedDocs.find((d) => d.id === 'guides/getting_started') ||
+      loadedDocs.find((d) => d.id.includes('getting_started')) ||
       loadedDocs[0];
 
     if (targetDoc) {

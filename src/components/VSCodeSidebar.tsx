@@ -28,9 +28,24 @@ export const VSCodeSidebar: React.FC<VSCodeSidebarProps> = ({
   activeHeadingId,
   onSelectHeading,
 }) => {
-  const [collapsedFolders, setCollapsedFolders] = useState<Record<string, boolean>>({});
+  // Initially only the 'guides' folder is open by default
+  const [openFolders, setOpenFolders] = useState<Record<string, boolean>>(() => ({
+    docs: true,
+    guides: true,
+  }));
   const [isTocOpen, setIsTocOpen] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Auto-expand the folder containing the active document
+  useEffect(() => {
+    if (selectedDocId) {
+      const parts = selectedDocId.split('/');
+      if (parts.length > 1) {
+        const parentPath = parts.slice(0, -1).join('/');
+        setOpenFolders((prev) => (prev[parentPath] ? prev : { ...prev, [parentPath]: true }));
+      }
+    }
+  }, [selectedDocId]);
 
   // Resizable sidebar width with persistence
   const [sidebarWidth, setSidebarWidth] = useState(() => {
@@ -163,7 +178,7 @@ export const VSCodeSidebar: React.FC<VSCodeSidebarProps> = ({
   }, [activeHeadingId]);
 
   const toggleFolder = (path: string) => {
-    setCollapsedFolders((prev) => ({ ...prev, [path]: !prev[path] }));
+    setOpenFolders((prev) => ({ ...prev, [path]: !prev[path] }));
   };
 
   // Render a folder or doc recursively with connected tree guide lines
@@ -174,7 +189,7 @@ export const VSCodeSidebar: React.FC<VSCodeSidebarProps> = ({
     activeAncestors: boolean[] = []
   ) => {
     const isRoot = node.name === 'docs' && depth === 0;
-    const isFolderOpen = !collapsedFolders[node.fullPath];
+    const isFolderOpen = isRoot || Boolean(openFolders[node.fullPath]);
 
     return (
       <div key={node.fullPath} className="w-full relative">
@@ -222,7 +237,7 @@ export const VSCodeSidebar: React.FC<VSCodeSidebarProps> = ({
           </div>
         )}
 
-        {(!node.fullPath || isFolderOpen) && (
+        {(isRoot || isFolderOpen) && (
           <div className="relative">
             {node.children.map((child, index) => {
               const isLast = index === node.children.length - 1;
